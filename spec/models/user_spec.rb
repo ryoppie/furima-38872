@@ -33,7 +33,7 @@ RSpec.describe User, type: :model do
       end
     end
 
-    context '新規登録がうまくかないとき' do
+    context '新規登録ができないとき' do
       it 'ニックネームが空だと登録できない' do
         @user.nickname = ''
         @user.valid?
