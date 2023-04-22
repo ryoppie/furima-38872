@@ -13,7 +13,7 @@ class User < ApplicationRecord
     validates :nickname
     # @含むこと・存在することはdeviseのデフォルト実装のため省略
     # validates :email,    uniqueness: true
-    # 全角ひらがな、全角カタカナ、漢字
+    # 全角ひらがな、全角カタカナ、漢字 
     validates :last_name, format: { with: /\A[ぁ-んァ-ヶ一-龥々]/ }
     validates :first_name, format: { with: /\A[ぁ-んァ-ヶ一-龥々]/ }
     # 全角カタカナ
