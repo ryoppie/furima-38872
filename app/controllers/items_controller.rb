@@ -1,12 +1,12 @@
 class ItemsController < ApplicationController
   # ログインしていないユーザーはログインページに促す
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!, except: [:index ]#, :show
 
   # 重複処理をまとめる
-  before_action :set_item, only: [:show, :edit, :update, :destroy]
+  # before_action :set_item, only: [:show, :edit, :update, :destroy]
 
   def index
-    @items = Item.includes(:user).order('created_at DESC')
+  #  @items = Item.includes(:user).order('created_at DESC')
   end
 
   def new
@@ -28,9 +28,9 @@ class ItemsController < ApplicationController
     params.require(:item).permit(:image, :name, :description, :category_id, :item_status_id, :shipping_cost_id, :prefecture_id, :shipping_date_id, :price).merge(user_id: current_user.id)
   end
 
-  def set_item
-    @item = Item.find(params[:id])
-  end
+ # def set_item
+ #   @item = Item.find(params[:id])
+ # end
 
 end
 
