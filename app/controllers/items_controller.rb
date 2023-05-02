@@ -21,6 +21,22 @@ class ItemsController < ApplicationController
       render :new
     end
   end
+
+  def edit
+    @item = Item.find(params[:id])
+    redirect_to root_path unless current_user.id == @item.user_id
+  end
+
+  def update
+    @item = Item.find(params[:id])
+   if @item.update(item_params)
+    # バリデーションがOKであれば詳細画面へ
+      redirect_to item_path(item_params)
+    else
+      # NGであれば、エラー内容とデータを保持したままeditファイルを読み込み、エラーメッセージを表示させる
+      render 'edit'
+    end
+  end
     
   def show
     @item = Item.find(params[:id])
