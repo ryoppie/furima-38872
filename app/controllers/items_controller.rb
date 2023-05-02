@@ -3,7 +3,7 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
 
   # 重複処理をまとめる
-  # before_action :set_item, only: [:show, :edit, :update, :destroy]
+   before_action :set_item, only: [:show, :edit, :update]
 
   def index
   @items = Item.includes(:user).order('created_at DESC')
@@ -21,9 +21,23 @@ class ItemsController < ApplicationController
       render :new
     end
   end
+
+  def edit
+    redirect_to root_path unless current_user.id == @item.user_id
+  end
+
+  def update
+   if @item.update(item_params)
+    # バリデーションがOKであれば詳細画面へ
+      redirect_to item_path(item_params)
+    else
+      # NGであれば、エラー内容とデータを保持したままeditファイルを読み込み、エラーメッセージを表示させる
+      render 'edit'
+    end
+  end
     
   def show
-    @item = Item.find(params[:id])
+
   end
 
   private
