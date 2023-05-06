@@ -5,7 +5,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :items
+  has_many :orders
 
+  
   with_options presence: true do # 指定された属性が空でないことでまとめる(with_options)
     # 存在すること・確認用を含めて2回入力・6字以上はdeviseのデフォルト実装のため省略
     # 半角英数字（空文字NG）以外の場合には、メッセージを出す
