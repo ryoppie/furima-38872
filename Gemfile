@@ -77,3 +77,5 @@ gem 'payjp'
 gem 'pry-rails'
 
 gem 'dotenv-rails'
+
+gem "aws-sdk-s3", require: false
